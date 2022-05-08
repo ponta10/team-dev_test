@@ -1,3 +1,11 @@
+<?php
+$raw = file_get_contents('php://input'); // POSTされた生のデータを受け取る
+$data = json_decode($raw); // json形式をphp変数に変換
+
+$res = $data; // やりたい処理
+
+// echoすると返せる
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +15,7 @@
   <title>Document</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="reset.css">
+  <scrip defer src="cart.js"></script>
 </head>
 <body>
 <section class="carts">
@@ -18,7 +27,9 @@
   <!-- <p class="cart-inquiry">※申し込み後3日後になってもエージェ
     ンシーから連絡がなかった場合、こち
     らにお問い合わせください</p> -->
-  <button><a href="#">申し込む</a></button>
+    <form action="apply.php" method="get" class="form">
+      <!-- <button type="submit">申し込む</button> -->
+    </form>
   <p class="none">カートに何も入っていません</p>
 </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>

@@ -131,6 +131,9 @@ header{
       & p{
         display: inline;
       }
+      & button{
+        width: 30%;
+      }
     }
     &_category{
       margin: 20px 0;
@@ -156,14 +159,14 @@ header{
       }
     }
     &_img{
-      display: flex;
+      display: block;
       // justify-content: space-between;
       & .lader{
         width: 45%;
         margin-right: 10px;
       }
       & .site{
-        width: 45%;
+        width: 100%;
         object-fit: cover;
       }
       & .cart{
@@ -194,7 +197,7 @@ header{
     }
     &_table{
       & table{
-        width: 70%;
+        width: 100%;
         margin: 30px auto;
         border-collapse: collapse;
         & td{
@@ -220,6 +223,9 @@ header{
           background-color: #44B59A;
           border-radius: 50%; /* 要素を丸くする */
         }
+      }
+      & img{
+        width: 100%;
       }
       & .service-step{
         box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
@@ -277,11 +283,14 @@ header{
       font-weight: 700;
       padding: 10px 30px;
       border-radius: 10px;
-      width: 50%;
+      width: 100%;
       margin:  100px auto;
       text-align: center;
     }
   }
+}
+.no{
+  width: 90%;
 }
 
 .cartImg{
@@ -476,4 +485,66 @@ header{
 .battle-rader{
   width: 110%;
   height: 110%;
+}
+
+.container{
+  .contact-table {
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+}
+
+.step {
+    span {
+        width: 9rem;
+        height: 9rem;
+        font-size: 3.7rem;
+
+        &::after {
+            width: 16rem;
+            bottom: 6.8rem;
+            left: 6.7rem;
+        }
+    }
+}
+
+
+.color{
+    &::after{
+        height: 0.6rem !important;
+        bottom: 6.5rem !important;
+    }
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 3rem;
+    width: 40rem;
+    height: 14rem;
+
+    img {
+        height: 14rem;
+        vertical-align: 50%;
+    }
+
+
+    h1 {
+        line-height: 17rem;
+        font-size: 6rem;
+    }
+}
+
+
+.check table td {
+    font-size: 4.7rem;
+    width: 61rem;
+}
+
+.check table th {
+    font-size: 3rem;
+    margin: 0 -18rem;
+    width: 19rem;
+}
 }

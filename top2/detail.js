@@ -102,11 +102,3 @@ function slider(){
 }
 
 // window.localStorage.clear();
-
-// const no = document.querySelector('.no')
-// no.addEventListener('click',goback)
-
-// function goback(){
-//   history.back();
-//   console.log('aaaaaaaaaaaaa')
-// }

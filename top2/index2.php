@@ -546,7 +546,7 @@ require(dirname(__FILE__) . "/dbconnect.php");
     <div class="cart_cnt hidden">
       <span id="js_cart_cnt"></span>
     </div>
-    <a href="cart.html" target="_blank" rel="noopener noreferrer"><img src="img/iconmonstr-shopping-cart-3-240.png" alt=""></a>
+    <a href="cart.php" target="_blank" rel="noopener noreferrer"><img src="img/iconmonstr-shopping-cart-3-240.png" alt=""></a>
   </div>
   <section class="agent">
     <?php

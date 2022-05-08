@@ -5,6 +5,10 @@ window.onload = function () {
 
   if (items) {
     // カート商品の数分、要素を作成
+    const form = document.querySelector('.form')
+    const button = document.createElement('button')
+    button.innerHTML='申し込みフォームへ'
+    form.appendChild(button)
     for (var i = 0; i < items.length; i++) {
       var li = document.createElement('li'),
       h2 = document.createElement('h2');
@@ -15,16 +19,18 @@ window.onload = function () {
           return element.name === value.name && element.age === value.age;
         }) === index
       });
-      console.log(result[i]);
-
       // console.log(result[i].id);
       if(result[i]){
         h2.appendChild(document.createTextNode(result[i].name));
         li.appendChild(h2);
         fragment.appendChild(li);
       }
+      const input = document.createElement('input')
+      form.appendChild(input);
+      input.setAttribute('type','hidden')
+      input.setAttribute('name','apply[]')
+      input.setAttribute('value',result[i].name)
   }
-
   // 作成した要素の追加
   ele.appendChild(fragment);
   // 合計金額の表示
