@@ -1,0 +1,58 @@
+version: '3'
+# mysqlのテーブルやらなんやらを保存するやつ
+volumes:
+  mysql-volume: 
+# 各コンテナの設定
+services:
+  # phpサーバー
+  php:
+    build: # Dockerfileで設定する
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    volumes: # ./src/に入れたファイルが/usr/share/nginx/htmlに同期される。
+      - ./src:/usr/share/nginx/html
+  # nginxサーバー
+  web:
+    build: # Dockerfileで設定する
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    ports: # ポートの設定(後で.envでする)
+      - 80:80
+    depends_on: # 先にphpサーバーを立ち上げる
+      - php
+    volumes: # ./src/に入れたファイルが/usr/share/nginx/htmlに同期される。
+      - ./src/:/usr/share/nginx/html
+  # データベースサーバー
+  db:
+    build: # Dockerfileで設定する
+      context: .
+      dockerfile: ./docker/mysql/Dockerfile
+    ports: # ポートの設定(後で.envでする)
+      - 3336:3336
+    environment: # ユーザとかパスワードとかの設定(後で.envでする)
+      MYSQL_DATABASE: shukatsu
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+      TZ: 'Asia/Tokyo'
+    volumes: # mysqlのテーブルやらなんやらを保存する
+      - ./docker/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./docker/mysql/conf.d:/etc/mysql/conf.d
+      - ./docker/mysql/data:/var/lib/mysql
+  # PHPMyAdminサーバー
+  phpmyadmin: # デフォルトのままで不都合ないのでDockerHubにあるイメージをそのまま使う
+    image: phpmyadmin/phpmyadmin:latest
+    environment:
+      PMA_HOST: 'db' # ホストはデータベースサーバーのサービス名(26行目)
+      PMA_USER: 'root' # デフォルトでログインしているユーザー(今回はルートユーザー)
+      PMA_PASSWORD: 'password' # 上記ユーザーのパスワード(今回はルートユーザーのパスワード)
+    ports: # ポートの設定(後で.envでする)
+    - 88:88
+  # メール確認用サーバー
+  # とりあえずメールがきちんと送信できたか見たいだけなので、簡単に導入できるMailHogを使っている。
+  # 外部にメール送るにはIPアドレスの許可やらその他いろいろ面倒くさいので今回はやらない。
+  mailhog:
+    image: mailhog/mailhog
+    ports: # ポートの設定(後で.envでする)
+      - 8025:8025
+      - "1025:1025"
